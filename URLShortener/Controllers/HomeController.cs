@@ -18,7 +18,12 @@ namespace URLShortener.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult ShortURLInfo()
         {
             return View();
         }
