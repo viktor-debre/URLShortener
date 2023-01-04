@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using URLShortener.DAO;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+string connectionString = builder.Configuration.GetConnectionString("SqlServerConnectionStrings") ?? "";
+
+builder.Services.AddDbContext<ApplicationContext>(option => option.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
