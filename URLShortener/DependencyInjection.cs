@@ -14,6 +14,7 @@ namespace URLShortener
             services.AddScoped<IURLRepository, URLRepository>();
 
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IURLService, URLService>();
         }
     }
 }
