@@ -15,6 +15,9 @@ namespace URLShortener
 
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IURLService, URLService>();
+
+            services.AddSingleton<HttpClient>();
+            services.AddScoped<IShortenerService, ShortenerService>();
         }
     }
 }
