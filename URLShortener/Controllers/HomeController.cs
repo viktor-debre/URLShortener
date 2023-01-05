@@ -10,14 +10,18 @@ namespace URLShortener.Controllers
     public class HomeController : Controller
     {
         private readonly IURLService _urlService;
+        private readonly IAccountService _accountService;
 
-        public HomeController(IURLService urlService)
+        public HomeController(IURLService urlService, IAccountService accountService)
         {
             _urlService = urlService;
+            _accountService = accountService;
         }
 
         public async Task<IActionResult> Index()
         {
+            var user = await _accountService.GetUserByName(User.Identity.Name);
+            ViewData["Role"] = user.Role;
             var urls = await _urlService.GetAllURLs();
             return View(urls);
         }

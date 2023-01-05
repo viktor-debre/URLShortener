@@ -1,5 +1,4 @@
 ﻿using URLShortener.DAO.Interfaces;
-using URLShortener.Models;
 using URLShortener.Models.Entities;
 using URLShortener.Services.Interfaces;
 
@@ -44,6 +43,14 @@ namespace URLShortener.Services.Realization
                 }
             }
             return false;
+        }
+
+        public async Task<User?> GetUserByName(string login)
+        {
+            var usersList = await _unitOfWork.Users.GetAll();
+            var user = usersList.FirstOrDefault(user => user.Login == login);
+
+            return user;
         }
     }
 }

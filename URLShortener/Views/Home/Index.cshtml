@@ -6,9 +6,9 @@
     {
         <tr>
             <td>@item.Id</td>
-            <td>@item.FullUrl</td>
-            <td>@item.ShortUrl</td>
-            @if (User.Identity.Name == item.CreatedBy)
+            <td><a href="@item.FullUrl">@item.FullUrl</a></td>
+            <td><a href="@item.ShortUrl">@item.ShortUrl</a></td>
+            @if (User.Identity.Name == item.CreatedBy || @ViewData["Role"].ToString() == "admin")
             {
                 <td><a asp-controller="Home" asp-action="DeleteUrl" asp-route-id="@item.Id">Delete</a></td>
             }
