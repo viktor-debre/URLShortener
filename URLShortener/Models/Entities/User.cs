@@ -1,9 +1,7 @@
-﻿namespace URLShortener.Models
+﻿namespace URLShortener.Models.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
-        public string Id { get; set; }
-
         public string Login { get; set; }
 
         public string Password { get; set; }

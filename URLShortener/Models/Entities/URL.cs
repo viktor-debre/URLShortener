@@ -1,9 +1,7 @@
-﻿namespace URLShortener.Models
+﻿namespace URLShortener.Models.Entities
 {
-    public class URL
+    public class URL : BaseEntity
     {
-        public int Id { get; set; }
-
         public string FullUrl { get; set; }
 
         public string? ShortUrl { get; set; }
