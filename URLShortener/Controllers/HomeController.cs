@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using URLShortener.Models;
+using URLShortener.Models.ViewModels;
 
 namespace URLShortener.Controllers
 {
@@ -13,6 +15,7 @@ namespace URLShortener.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -23,6 +26,7 @@ namespace URLShortener.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult ShortURLInfo()
         {
             return View();
