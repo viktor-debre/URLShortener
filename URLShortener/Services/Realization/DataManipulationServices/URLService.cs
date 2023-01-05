@@ -7,19 +7,32 @@ namespace URLShortener.Services.Realization
     public class URLService : IURLService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IShortenerService _shortenerService;
 
-        public URLService(IUnitOfWork unitOfWork)
+        public URLService(IUnitOfWork unitOfWork, IShortenerService shortenerService)
         {
             _unitOfWork = unitOfWork;
+            _shortenerService = shortenerService;
         }
 
-        public async Task<bool> AddURL(URL url)
+        public async Task<bool> AddURL(string fullUrl, string userName)
         {
-            if (url != null)
+            if (fullUrl != null)
             {
-                await _unitOfWork.URLs.Add(url);
-
-                var result = _unitOfWork.Save();
+                string shortUrl = await _shortenerService.GetShortUrlFromAPI(fullUrl);
+                var result = 0;
+                if (shortUrl != "")
+                {
+                    var url = new URL() 
+                    { 
+                        FullUrl = fullUrl,
+                        ShortUrl = shortUrl,
+                        CreatedBy = userName,
+                        CreatedDate = DateTime.Now
+                    };
+                    await _unitOfWork.URLs.Add(url);
+                    result = _unitOfWork.Save();
+                }
 
                 if (result > 0)
                 {
@@ -63,7 +76,7 @@ namespace URLShortener.Services.Realization
             return productDetailsList;
         }
 
-        public async Task<URL> GetURLById(int urlId)
+        public async Task<URL?> GetURLById(int urlId)
         {
             if (urlId > 0)
             {

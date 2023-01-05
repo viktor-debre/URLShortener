@@ -14,7 +14,7 @@ namespace URLShortener.Services.Realization
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<User> AuthenticateUser(string login, string password)
+        public async Task<User?> AuthenticateUser(string login, string password)
         {
             var usersList = await _unitOfWork.Users.GetAll();
             var user = usersList.FirstOrDefault(user => user.Login == login && user.Password == password);

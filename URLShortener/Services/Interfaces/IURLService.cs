@@ -4,7 +4,7 @@ namespace URLShortener.Services.Interfaces
 {
     public interface IURLService
     {
-        public Task<bool> AddURL(URL url);
+        public Task<bool> AddURL(string fullUrl, string userName);
 
         public Task<bool> DeleteURL(int urlId);
 
