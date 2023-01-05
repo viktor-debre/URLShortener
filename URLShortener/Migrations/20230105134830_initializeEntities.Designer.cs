@@ -12,8 +12,8 @@ using URLShortener.DAO;
 namespace URLShortener.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230104191229_CreateBaseEntities")]
-    partial class CreateBaseEntities
+    [Migration("20230105134830_initializeEntities")]
+    partial class initializeEntities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace URLShortener.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("URLShortener.Models.URL", b =>
+            modelBuilder.Entity("URLShortener.Models.Entities.URL", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,10 +52,13 @@ namespace URLShortener.Migrations
                     b.ToTable("URLs");
                 });
 
-            modelBuilder.Entity("URLShortener.Models.User", b =>
+            modelBuilder.Entity("URLShortener.Models.Entities.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Login")
                         .IsRequired()

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using URLShortener.Models;
+using URLShortener.Models.Entities;
 
 namespace URLShortener.DAO
 {
